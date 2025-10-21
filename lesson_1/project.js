@@ -15,20 +15,21 @@ const upper = new UpperCaseStream();
 
 class Logger extends eventEmitter {
   log(message) {
-    console.log(`[INFO]: ${message}`);
     this.emit("info", message);
   }
   error(message) {
-    console.error(`[ERROR]: ${message}`);
     this.emit("error", message);
   }
   warn(message) {
-    console.warn(`[WARN]: ${message}`);
     this.emit("warn", message);
   }
 }
 
 const logger = new Logger();
+
+logger.on("info", (message) => console.log(`[INFO]: ${message}`));
+logger.on("error", (message) => console.error(`[ERROR]: ${message}`));
+logger.on("warn", (message) => console.warn(`[WARN]: ${message}`));
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && req.url === "/") {
