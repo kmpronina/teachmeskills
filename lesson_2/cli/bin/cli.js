@@ -151,7 +151,7 @@ async function main() {
       } else if (arg === "set") {
         const newOpt = await prompt('Enter "key"="value" formatted pair');
 
-        const [key, value] = [newOpt.split("=")[0], newOpt.split("=")[1]];
+        const [key, value] = newOpt.split("=");
 
         if (!key || !value) {
           console.error('Only "key"="value" formatted pair allowed');

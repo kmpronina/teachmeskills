@@ -84,11 +84,11 @@ const server = http.createServer(async (req, res) => {
       const max = parseInt(searchParams.get("max"));
 
       if (Number.isNaN(min) || Number.isNaN(max)) {
-        send(422, { error: "Invalid type. MIN ans MAX should be numbers" });
+        send(400, { error: "Invalid type. MIN and MAX should be numbers" });
       }
 
       if (min < 10 || min > 20 || max < 10 || max > 20) {
-        send(422, { error: "MIN ans MAX must be between 10 and 20" });
+        send(400, { error: "MIN and MAX must be between 10 and 20" });
       }
 
       const random = Math.floor(Math.random() * (max - min + 1) + min);
