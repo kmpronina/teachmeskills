@@ -1,9 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Param,
   ParseUUIDPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { User } from './user.entity';
@@ -25,7 +28,22 @@ export class UsersController {
   }
 
   @Post()
+  @HttpCode(201)
   create(@Body() dto: CreateUserDto) {
     return this.users.create(dto);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() dto: Partial<CreateUserDto>,
+  ) {
+    return this.users.update(id, dto);
+  }
+
+  @Delete(':id')
+  @HttpCode(204)
+  delete(@Param('id', new ParseUUIDPipe()) id: string) {
+    this.users.delete(id);
   }
 }
