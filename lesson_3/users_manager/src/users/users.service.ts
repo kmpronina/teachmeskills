@@ -34,7 +34,7 @@ export class UsersService implements OnModuleInit {
 
     this.users.push(newUser);
 
-    this.logger.info(`User was created: ${newUser.name} (${newUser.email})`);
+    this.logger.log(`User was created: ${newUser.name} (${newUser.email})`);
 
     return newUser;
   }
@@ -48,7 +48,7 @@ export class UsersService implements OnModuleInit {
 
     this.users.splice(index, 1);
 
-    this.logger.warn(`User with id ${id} was deleted`);
+    this.logger.log(`User with id ${id} was deleted`);
   }
 
   update(id: string, dto: Partial<CreateUserDto>): User {
@@ -61,7 +61,7 @@ export class UsersService implements OnModuleInit {
       user.email = dto.email;
     }
 
-    this.logger.info(`User with id ${id} was updated`);
+    this.logger.log(`User with id ${id} was updated`);
 
     return user;
   }
